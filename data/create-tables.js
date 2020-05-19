@@ -15,13 +15,27 @@ async function run() {
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
+                    display_name VARCHAR(256) NOT NULL,
                     hash VARCHAR(512) NOT NULL
                 );           
-                CREATE TABLE animals (
+                CREATE TABLE saved_locations (
                     id SERIAL PRIMARY KEY NOT NULL,
-                    name VARCHAR(512) NOT NULL,
-                    cool_factor INTEGER NOT NULL,
-                    owner_id INTEGER NOT NULL REFERENCES users(id)
+                    city VARCHAR(256) NOT NULL,
+                    state VARCHAR(256) NOT NULL,
+                    lat INTEGER NOT NULL,
+                    lon INTEGER NOT NULL,
+                    city_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL REFERENCES users(id),
+                    date VARCHAR(256) NOT NULL
+            );
+                CREATE TABLE journals (
+                    id SERIAL PRIMARY KEY NOT NULL,
+                    user_id INTEGER NOT NULL REFERENCES users(id),
+                    lat INTEGER NOT NULL,
+                    lon INTEGER NOT NULL,
+                    date VARCHAR(256) NOT NULL,
+                    title VARCHAR(512) NOT NULL,
+                    body VARCHAR(512) NOT NULL
             );
         `);
 

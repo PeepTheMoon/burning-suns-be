@@ -1,7 +1,8 @@
 const client = require('../lib/client');
 // import our seed data:
-const animals = require('./animals.js');
+const saved_locationsData = require('./saved_locations.js');
 const usersData = require('./users.js');
+const journalsData = require('./journals.js');
 const { getEmoji } = require('../lib/emoji.js');
 
 run();
@@ -14,23 +15,33 @@ async function run() {
     const users = await Promise.all(
       usersData.map(user => {
         return client.query(`
-                      INSERT INTO users (email, hash)
-                      VALUES ($1, $2)
+                      INSERT INTO users (email, hash, display_name)
+                      VALUES ($1, $2, $3)
                       RETURNING *;
                   `,
-        [user.email, user.hash]);
+        [user.email, user.hash, user.display_name]);
       })
     );
       
     const user = users[0].rows[0];
 
     await Promise.all(
-      animals.map(animal => {
+      saved_locationsData.map(saved_location => {
         return client.query(`
-                    INSERT INTO animals (name, cool_factor, owner_id)
-                    VALUES ($1, $2, $3);
+                    INSERT INTO saved_locations (city, state, lat, lon, city_id, user_id, date)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7);
                 `,
-        [animal.name, animal.cool_factor, user.id]);
+        [saved_location.city, saved_location.state, saved_location.lat, saved_location.lon, saved_location.city_id, user.id, saved_location.date]);
+      })
+    );
+
+    await Promise.all(
+      journalsData.map(journal => {
+        return client.query(`
+                    INSERT INTO journals (user_id, location_id, date, title, body)
+                    VALUES ($1, $2, $3, $4, $5);
+                `,
+        [user.id, journal.location_id, journal.date, journal.title, journal.body]);
       })
     );
     
