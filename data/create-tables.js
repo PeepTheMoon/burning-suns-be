@@ -15,20 +15,15 @@ async function run() {
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
                     email VARCHAR(256) NOT NULL,
-                    display_name VARCHAR(256) NOT NULL,
+                
                     hash VARCHAR(512) NOT NULL
                 );           
                 CREATE TABLE saved_locations (
                     id SERIAL PRIMARY KEY NOT NULL,
                     city VARCHAR(256) NOT NULL,
                     state VARCHAR(256) NOT NULL,
-<<<<<<< HEAD
-                    lat INTEGER NOT NULL,
-                    lon INTEGER NOT NULL,
-=======
                     lat VARCHAR(256) NOT NULL,
                     lon VARCHAR(256) NOT NULL,
->>>>>>> 248558d40c65ae31bd585abfbec804b83722b19e
                     city_id INTEGER NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id),
                     date VARCHAR(256) NOT NULL
@@ -36,13 +31,8 @@ async function run() {
                 CREATE TABLE journals (
                     id SERIAL PRIMARY KEY NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id),
-<<<<<<< HEAD
-                    lat INTEGER NOT NULL,
-                    lon INTEGER NOT NULL,
-=======
                     lat VARCHAR(256) NOT NULL,
                     lon VARCHAR(256) NOT NULL,
->>>>>>> 248558d40c65ae31bd585abfbec804b83722b19e
                     date VARCHAR(256) NOT NULL,
                     title VARCHAR(512) NOT NULL,
                     body VARCHAR(512) NOT NULL
