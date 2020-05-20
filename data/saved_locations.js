@@ -14,7 +14,7 @@ module.exports = [
     lat: '45.5051',
     lon: '122.6750',
     city_id: 2,
-    user_id: 2,
+    user_id: 3,
     date: ''
   }
 ];
