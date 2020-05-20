@@ -28,10 +28,10 @@ async function run() {
     await Promise.all(
       saved_locationsData.map(saved_location => {
         return client.query(`
-                    INSERT INTO saved_locations (city, state, lat, lon, city_id, user_id, date)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7);
+                    INSERT INTO saved_locations (city, state, lat, lon, user_id, date)
+                    VALUES ($1, $2, $3, $4, $5, $6);
                 `,
-        [saved_location.city, saved_location.state, saved_location.lat, saved_location.lon, saved_location.city_id, user.id, saved_location.date]);
+        [saved_location.city, saved_location.state, saved_location.lat, saved_location.lon, user.id, saved_location.date]);
       })
     );
 

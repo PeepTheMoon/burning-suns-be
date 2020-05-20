@@ -23,7 +23,6 @@ async function run() {
                     state VARCHAR(256) NOT NULL,
                     lat VARCHAR(256) NOT NULL,
                     lon VARCHAR(256) NOT NULL,
-                    city_id INTEGER NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id),
                     date VARCHAR(256) NOT NULL
             );
