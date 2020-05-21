@@ -33,7 +33,7 @@ async function run() {
                     city VARCHAR(256) NOT NULL,
                     date VARCHAR(256) NOT NULL,
                     title VARCHAR(512) NOT NULL,
-                    body VARCHAR(512) NOT NULL,
+                    body VARCHAR(1000) NOT NULL,
                     wish BOOLEAN NOT NULL
             );
         `);
