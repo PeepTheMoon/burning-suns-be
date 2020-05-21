@@ -23,18 +23,18 @@ async function run() {
                     state VARCHAR(256) NOT NULL,
                     lat VARCHAR(256) NOT NULL,
                     lon VARCHAR(256) NOT NULL,
-                    city_id INTEGER NOT NULL,
-                    user_id INTEGER NOT NULL REFERENCES users(id),
-                    date VARCHAR(256) NOT NULL
+                    user_id INTEGER NOT NULL REFERENCES users(id)
             );
-                CREATE TABLE journals (
+                CREATE TABLE notes (
                     id SERIAL PRIMARY KEY NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id),
                     lat VARCHAR(256) NOT NULL,
                     lon VARCHAR(256) NOT NULL,
+                    city VARCHAR(256) NOT NULL,
                     date VARCHAR(256) NOT NULL,
                     title VARCHAR(512) NOT NULL,
-                    body VARCHAR(512) NOT NULL
+                    body VARCHAR(512) NOT NULL,
+                    wish BOOLEAN NOT NULL
             );
         `);
 

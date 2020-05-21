@@ -2,7 +2,7 @@ const client = require('../lib/client');
 // import our seed data:
 const saved_locationsData = require('./saved_locations.js');
 const usersData = require('./users.js');
-const journalsData = require('./journals.js');
+const notesData = require('./notes.js');
 const { getEmoji } = require('../lib/emoji.js');
 
 run();
@@ -28,20 +28,20 @@ async function run() {
     await Promise.all(
       saved_locationsData.map(saved_location => {
         return client.query(`
-                    INSERT INTO saved_locations (city, state, lat, lon, city_id, user_id, date)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7);
+                    INSERT INTO saved_locations (city, state, lat, lon, user_id)
+                    VALUES ($1, $2, $3, $4, $5);
                 `,
-        [saved_location.city, saved_location.state, saved_location.lat, saved_location.lon, saved_location.city_id, user.id, saved_location.date]);
+        [saved_location.city, saved_location.state, saved_location.lat, saved_location.lon, user.id]);
       })
     );
 
     await Promise.all(
-      journalsData.map(journal => {
+      notesData.map(notes => {
         return client.query(`
-                    INSERT INTO journals (user_id, lat, lon, date, title, body)
-                    VALUES ($1, $2, $3, $4, $5, $6);
+                    INSERT INTO notes (user_id, lat, lon, city, date, title, body, wish)
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
                 `,
-        [user.id, journal.lat, journal.lon, journal.date, journal.title, journal.body]);
+        [user.id, notes.lat, notes.lon, notes.city, notes.date, notes.title, notes.body, notes.wish]);
       })
     );
     
