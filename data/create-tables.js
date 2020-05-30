@@ -11,6 +11,8 @@ async function run() {
     await client.connect();
 
     // run a query to create tables
+    // very cool data modeling--I love that you have two tables that point to the user
+    // it does look like postgres has a DATE datatype you might want to look into https://www.postgresqltutorial.com/postgresql-date/
     await client.query(`
                 CREATE TABLE users (
                     id SERIAL PRIMARY KEY,
